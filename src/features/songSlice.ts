@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Song {
-  id: number;
-  title: string;
-  artist: string;
+  // id: string;
+  // title: string;
+  // artist: string;
+  // album: string;
+  // genre: string;
+  [key: string]: any;
 }
 
 interface SongState {
@@ -32,8 +35,6 @@ export const songSlice = createSlice({
     },
     addSong: (state, action: PayloadAction<Song>) => {
       state.songs.push(action.payload);
-      console.log("add song: ", action.payload);
-      console.log(state.songs);
     },
     removeOneSong: (state, action: PayloadAction<number>) => {
       state.songs = state.songs.filter((song) => song.id !== action.payload);

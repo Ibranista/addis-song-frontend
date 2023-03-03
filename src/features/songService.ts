@@ -23,9 +23,9 @@ function* getAllSongs() {
         },
       })
     );
-    const formattedSongs: { data: any } = response.data;
+    const formattedSongs: any = response.data;
     yield put(getSongsSuccess(formattedSongs));
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
   }
 }
