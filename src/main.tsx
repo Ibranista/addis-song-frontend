@@ -15,9 +15,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Provider store={store}>
         <NavBar />
         <CollapsibleSidebar>
-          <Conditional>
+          {/* <Conditional> */}
             <App />
-          </Conditional>
+          {/* </Conditional> */}
         </CollapsibleSidebar>
       </Provider>
     </Router>
@@ -31,22 +31,22 @@ interface ConditionalProps {
   children: ReactNode;
 }
 
-function Conditional({ children }: ConditionalProps): JSX.Element | null {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
-  const navigate = useNavigate();
+// function Conditional({ children }: ConditionalProps): JSX.Element | null {
+//   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+//   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsUserSignedIn(true);
-    });
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged((user) => {
+//       setIsUserSignedIn(true);
+//     });
 
-    return unsubscribe;
-  }, []);
+//     return unsubscribe;
+//   }, []);
 
-  if (!isUserSignedIn) {
-    navigate("/AccountCreation");
-    return null;
-  }
+//   if (!isUserSignedIn) {
+//     navigate("/AccountCreation");
+//     return null;
+//   }
 
-  return <>{children}</>;
-}
+//   return <>{children}</>;
+// }
