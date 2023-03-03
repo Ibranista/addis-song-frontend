@@ -36,12 +36,12 @@ export const songSlice = createSlice({
     addSong: (state, action: PayloadAction<Song>) => {
       state.songs.push(action.payload);
     },
-    removeOneSong: (state, action: PayloadAction<number>) => {
+    removeOneSong: (state, action: PayloadAction<string>) => {
       state.songs = state.songs.filter((song) => song.id !== action.payload);
     },
     editSong: (
       state,
-      action: PayloadAction<{ id: number; data: Partial<Song> }>
+      action: PayloadAction<{ id: string; data: Partial<Song> }>
     ) => {
       const { id, data } = action.payload;
       const songIndex = state.songs.findIndex((song) => song.id === id);

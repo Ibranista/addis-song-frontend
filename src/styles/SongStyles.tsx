@@ -92,7 +92,7 @@ const SongList = () => {
   };
 
   const [slectedGenre, setSlectedGenre] = useState("");
-  const genres = [...new Set(songs.map((song: any) => song.genre))];
+  const genres:any = [...new Set(songs.map((song: any) => song.genre))];
   const handleGenreChange = (e: any) => {
     setSlectedGenre(e.target.value);
   };
@@ -102,7 +102,7 @@ const SongList = () => {
       <h1>hello</h1>
       <select value={slectedGenre} onChange={handleGenreChange}>
         <option value="">All Genres</option>
-        {genres.map((genre) => (
+        {genres.map((genre:any) => (
           <option key={genre} value={genre}>
             {genre}
           </option>
@@ -110,8 +110,8 @@ const SongList = () => {
       </select>
       <ContainerWrapper>
         {songs
-          .filter((song) => !slectedGenre || song.genre === slectedGenre)
-          .map((song) => (
+          .filter((song:any) => !slectedGenre || song.genre === slectedGenre)
+          .map((song:any) => (
             <Container key={song._id}>
               <ImageContainer>
                 <ArtistImage src={"data:image/jpeg;base64"} alt={song.artist} />

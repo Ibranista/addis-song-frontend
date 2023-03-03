@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ReactNode } from "react";
 import { space, color } from "styled-system";
 
 const NavContainer = styled.nav`
@@ -27,7 +28,12 @@ const NavLink = styled.li`
   margin-right: 16px;
 `;
 
-const NavBox = ({ children, ...rest }) => (
+interface NavBoxProps {
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const NavBox = ({ children, ...rest }:NavBoxProps): JSX.Element => (
   <NavContainer {...rest}>
     <NavLogo>Welcome to songs master</NavLogo>
     <NavLinks>
