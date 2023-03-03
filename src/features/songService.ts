@@ -1,13 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import axios from "axios";
-
+import axios, { AxiosResponse } from "axios";
 // action methods
 import {
   addSong,
   getSongsFailure,
   getSongsFetch,
   getSongsSuccess,
-  editSong
+  editSong,
 } from "./songSlice";
 
 //getAllSongs url
@@ -16,16 +15,15 @@ const baseUrl = "/api/songs";
 
 function* getAllSongs() {
   try {
-    const songs: { data: any } = yield call(() =>
-      fetch(baseUrl, {
-        method: "GET",
+    const response: AxiosResponse<{ data: any }> = yield call(() =>
+      axios.get(baseUrl, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       })
     );
-    const formattedSongs: { data: any } = yield songs.json();
+    const formattedSongs: { data: any } = response.data;
     yield put(getSongsSuccess(formattedSongs));
   } catch (error) {
     console.log(error);
@@ -49,7 +47,7 @@ function* addSongs(action: any) {
 }
 // remove one song
 const removeSongUrl = "/api/songs/";
-function* removeSong(action: string) {
+function* removeSong(action: any) {
   try {
     yield call(() => axios.delete(removeSongUrl + action.payload));
   } catch (error) {
