@@ -19,7 +19,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/navbar" element={<NavBar />} />
         <Route path="/addSong" element={<AddSong />} />
-        <Route path="/sideBar" element={<Sidebar />} />
         <Route path="/AccountCreation" element={<AccountCreation />} />
         <Route path="/Total" element={<TotalStatistics />} />
       </Routes>

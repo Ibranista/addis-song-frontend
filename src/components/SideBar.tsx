@@ -6,18 +6,25 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
-
-const Sidebar = styled.div`
+interface SidebarParentProps {
+  width: string;
+  height: string;
+  p: number;
+}
+const Sidebar = styled.div<SidebarParentProps>`
   ${layout}
   ${space}
-  background-color: #333;
+background-color: #333;
   color: #fff;
   transition: width 0.5s ease;
   overflow: hidden;
   margin-top: 30px;
 `;
 
-const SidebarItem = styled.div`
+interface SidebarItemProps {
+  mb: number;
+}
+const SidebarItem = styled.div<SidebarItemProps>`
   ${space}
   cursor: pointer;
   &:hover {
@@ -31,8 +38,11 @@ const SidebarLink = styled.a`
   ${space}
   text-decoration: none;
 `;
-
-const MainContent = styled.div`
+interface MainContentProps {
+  width: string;
+  p: number;
+}
+const MainContent = styled.div<MainContentProps>`
   ${layout}
   ${space}
   background-color: #eee;
@@ -55,7 +65,7 @@ const SidebarContainer = styled.div`
   position: relative;
 `;
 
-function CollapsibleSidebar({ children }): JSX.Element {
+function CollapsibleSidebar({ children }: { children: JSX.Element }): any {
   const [collapsed, setCollapsed] = useState(false);
 
   const handleToggle = () => {
