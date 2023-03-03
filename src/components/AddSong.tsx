@@ -1,5 +1,4 @@
 import { toast } from "react-hot-toast";
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSong } from "../features/songSlice";
@@ -64,14 +63,7 @@ function AddSong() {
             onChange={onChange}
             placeholder="Album"
           />
-          {/* <input
-            id="albumImageUrl"
-            type="text"
-            name="albumImageUrl"
-            value={albumImageUrl}
-            onChange={onChange}
-            placeholder="Album Image Url"
-          /> */}
+          <h1 className="text-white">hello</h1>
           <button type="submit">Add Song</button>
         </form>
       </main>
