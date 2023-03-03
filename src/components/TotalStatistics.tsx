@@ -7,9 +7,9 @@ function TotalStatistics() {
   useEffect(() => {
     dispatch(getSongsFetch());
   }, [dispatch, songs]);
-  let artists = [];
-  let albums = [];
-  let genres = [];
+  let artists: any[] = [];
+  let albums: any[] = [];
+  let genres: any[] = [];
   for (let i = 0; i < songs.length; i++) {
     let artist = songs[i].artist.toLowerCase().trim();
     if (!artists.includes(artist)) {
@@ -37,7 +37,7 @@ function TotalStatistics() {
       genreCount[genre] = 1;
     }
   }
-  const countArtist: any = {};
+  const countArtist: { [artist: string]: { songs: number; albums: string[] } } = {};
   for (let i = 0; i < songs.length; i++) {
     let artist = songs[i].artist.toLowerCase();
     if (artist in countArtist) {
@@ -52,7 +52,7 @@ function TotalStatistics() {
       };
     }
   }
-  const artistNumbers: any = [];
+  const artistNumbers: JSX.Element[] = [];
   for (const [artist, count] of Object.entries(countArtist)) {
     artistNumbers.push(
       <div
@@ -65,7 +65,14 @@ function TotalStatistics() {
       </div>
     );
   }
-  const albumCount: any = {};
+
+  type AlbumCountType = {
+    [album: string]: {
+      songs: number;
+    };
+  };
+
+  const albumCount: AlbumCountType = {};
   for (let i = 0; i < songs.length; i++) {
     let album = songs[i].album;
     if (album in albumCount) {
