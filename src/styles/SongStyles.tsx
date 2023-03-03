@@ -16,10 +16,7 @@ type Props = {
   songs: Song[];
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+const Container = styled.div``;
 
 const ContainerWrapper = styled.div`
   display: flex;
@@ -28,9 +25,7 @@ const ContainerWrapper = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: flex-end;
 `;
 
 const ArtistImage = styled.img`
@@ -66,7 +61,7 @@ const SongGenre = styled.p`
 `;
 
 const SongButton = styled.button`
-  width: 50%;
+  font-size: 16px;
 `;
 
 const SongList = () => {
@@ -92,37 +87,58 @@ const SongList = () => {
   };
 
   const [slectedGenre, setSlectedGenre] = useState("");
-  const genres:any = [...new Set(songs.map((song: any) => song.genre))];
+  const genres: any = [...new Set(songs.map((song: any) => song.genre))];
   const handleGenreChange = (e: any) => {
     setSlectedGenre(e.target.value);
   };
 
   return (
     <>
-      <h1>hello</h1>
-      <select value={slectedGenre} onChange={handleGenreChange}>
+      <select
+        value={slectedGenre}
+        onChange={handleGenreChange}
+        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-x-slate-700 mb-3"
+      >
         <option value="">All Genres</option>
-        {genres.map((genre:any) => (
+        {genres.map((genre: any) => (
           <option key={genre} value={genre}>
             {genre}
           </option>
         ))}
       </select>
-      <ContainerWrapper>
+      <ContainerWrapper className="flex-col md:flex-row pb-5">
         {songs
-          .filter((song:any) => !slectedGenre || song.genre === slectedGenre)
-          .map((song:any) => (
-            <Container key={song._id}>
+          .filter((song: any) => !slectedGenre || song.genre === slectedGenre)
+          .map((song: any) => (
+            <Container
+              key={song._id}
+              className="flex flex-col mr-2 flex-wrap md:flex-row hover:bg-gray-300 hover:scale-105
+              transition duration-500 ease-in-out 
+               md:w-1/3 lg:w-1/4 xl:w-1/5
+              rounded-lg shadow-lg
+              hover:cursor-pointer
+              "
+            >
               <ImageContainer>
-                <ArtistImage src={"data:image/jpeg;base64"} alt={song.artist} />
+                <ArtistImage
+                  src={
+                    "https://c4.wallpaperflare.com/wallpaper/15/304/59/music-musical-notes-abstract-digital-art-wallpaper-preview.jpg"
+                  }
+                  alt={song.artist}
+                />
               </ImageContainer>
-              <SongDetailsContainer>
-                <SongTitle>{song.title}</SongTitle>
+              <SongDetailsContainer className="border-2">
+                <SongTitle className="text-xl underline font-bold">
+                  {song.title}
+                </SongTitle>
                 <SongArtist>{song.artist}</SongArtist>
                 <SongAlbum>Album: {song.album}</SongAlbum>
                 <SongGenre>Genre: {song.genre}</SongGenre>
-                <SongButton onClick={() => removeSong(song._id)}>
-                  Delete Me
+                <SongButton
+                  onClick={() => removeSong(song._id)}
+                  className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded w-full mb-2"
+                >
+                  Delete
                 </SongButton>
                 <SongButton
                   onClick={() =>
@@ -133,6 +149,7 @@ const SongList = () => {
                       genre: song.genre,
                     })
                   }
+                  className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full"
                 >
                   Edit Me
                 </SongButton>
