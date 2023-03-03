@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 // import "./index.css";
@@ -27,7 +27,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 import { auth } from "./auth/firebase";
 import { Toaster } from "react-hot-toast";
 
-function Conditional({ children }) {
+interface ConditionalProps {
+  children: ReactNode;
+}
+
+function Conditional({ children }: ConditionalProps): JSX.Element | null {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -44,5 +48,5 @@ function Conditional({ children }) {
     return null;
   }
 
-  return children;
+  return <>{children}</>;
 }
