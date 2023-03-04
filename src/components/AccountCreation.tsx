@@ -1,7 +1,7 @@
 import CreateUser from "../auth/CreateUser";
 import CreateWithGoogle from "../auth/CreateWithGoogle";
 function AccountCreation() {
-  const { SignInButton } = CreateWithGoogle();
+  const { SignInButton, SignInWithEmail } = CreateWithGoogle();
   return (
     <>
       <CreateUser />
@@ -16,6 +16,18 @@ function AccountCreation() {
         OR
       </section>
       <SignInButton />
+      {/* already have account option */}
+      <section
+        style={{
+          background: "grey ",
+          padding: "5px",
+          color: "white",
+          textAlign: "center",
+        }}
+      >
+        Already have an account?
+      </section>
+      <SignInWithEmail />
     </>
   );
 }

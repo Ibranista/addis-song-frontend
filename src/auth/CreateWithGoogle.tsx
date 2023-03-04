@@ -1,5 +1,6 @@
 import {
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut as userSignOut,
 } from "firebase/auth";
@@ -7,9 +8,10 @@ import { useState } from "react";
 import { auth } from "./firebase";
 import { toast } from "react-hot-toast";
 import GoogleStyles from "../styles/GoogleStyles";
+import { useNavigate } from "react-router-dom";
 function CreateWithGoogle() {
   const [isClicked, setIsClicked] = useState(false);
-
+const navigate = useNavigate()
   const SignInButton = () => {
     const GoogleButton = GoogleStyles();
     const signInWithGoogle = async () => {
@@ -68,9 +70,72 @@ function CreateWithGoogle() {
       </button>
     );
   };
+
+  function SignInWithEmail() {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+
+    const signInWithEmail = async (e: any) => {
+      e.preventDefault();
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        toast.success("signedin");
+        navigate("/");
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    return (
+      <div className="d-flex flex-col justify-center">
+        <h1 className="text-3xl font-bold mb-4 text-center">
+          Sign In With Email &amp; Password
+        </h1>
+        <form action="" className="max-w-md">
+          <label htmlFor="email" className="block mb-2 font-medium">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md"
+          />
+          <label htmlFor="password" className="block mb-2 font-medium">
+            Password:
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            required
+            className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md"
+          />
+          <button
+            type="submit"
+            onClick={signInWithEmail}
+            className="w-full bg-indigo-500 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-600"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   return {
     SignInButton,
     SignOut,
+    SignInWithEmail,
   };
 }
 
