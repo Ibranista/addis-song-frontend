@@ -42,10 +42,6 @@ function Conditional({ children }: ConditionalProps): JSX.Element | null {
         navigate("/AccountCreation");
         return null;
       }
-      if(user){
-        navigate("/");
-        return;
-      }
     });
 
     return unsubscribe;
