@@ -40,6 +40,7 @@ function AddSong() {
         mb-10
         md:text-6xl
         md:text-center
+        p-5
         "
         >
           Add Song Form
