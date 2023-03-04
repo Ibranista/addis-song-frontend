@@ -35,19 +35,22 @@ interface ConditionalProps {
 function Conditional({ children }: ConditionalProps): JSX.Element | null {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsUserSignedIn(true);
+      if (!isUserSignedIn) {
+        navigate("/AccountCreation");
+        return null;
+      }
+      if(user){
+        navigate("/");
+        return;
+      }
     });
 
     return unsubscribe;
-  }, []);
+  }, [isUserSignedIn, navigate]);
 
-  if (!isUserSignedIn) {
-    navigate("/AccountCreation");
-    return null;
-  }
 
   return <>{children}</>;
 }
