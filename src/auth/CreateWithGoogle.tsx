@@ -15,14 +15,14 @@ const navigate = useNavigate()
   const SignInButton = () => {
     const GoogleButton = GoogleStyles();
     const signInWithGoogle = async () => {
-      // if (navigator.onLine) {
+      if (navigator.onLine) {
       try {
         const provider = new GoogleAuthProvider();
         setIsClicked(true);
         await signInWithPopup(auth, provider);
-        // console.log "operation canceled" when pop up is closed
         if (auth.currentUser) {
           toast.success("successfully signed in!");
+          navigate("/")
         }
       } catch (error: any) {
         setIsClicked(false);
@@ -30,12 +30,11 @@ const navigate = useNavigate()
           toast.success("Operation cancelled");
         }
       }
-      // }
-      // else {
-      // console.log("error");
-      // toast.error("check your internet connection and try again!");
-      // setIsClicked(false);
-      // }
+      }
+      else {
+      toast.error("check your internet connection and try again!");
+      setIsClicked(false);
+      }
     };
     return (
       <GoogleButton>
