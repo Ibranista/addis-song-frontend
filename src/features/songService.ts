@@ -11,7 +11,7 @@ import {
 
 //getAllSongs url
 
-const baseUrl = "/api/songs";
+const baseUrl = "http://addis-song-backend.onrender.com/songs";
 
 function* getAllSongs() {
   try {
@@ -31,7 +31,7 @@ function* getAllSongs() {
 }
 
 // add song
-const addSongsUrl = "/api/songs/createSong";
+const addSongsUrl = "http://addis-song-backend.onrender.com/songs/createSong";
 function* addSongs(action: any) {
   try {
     const song: { data: any } = yield call(() =>
@@ -46,7 +46,7 @@ function* addSongs(action: any) {
   }
 }
 // remove one song
-const removeSongUrl = "/api/songs/";
+const removeSongUrl = "http://addis-song-backend.onrender.com/songs/";
 function* removeSong(action: any) {
   try {
     yield call(() => axios.delete(removeSongUrl + action.payload));
@@ -55,7 +55,7 @@ function* removeSong(action: any) {
   }
 }
 //edit a song
-const editSongUrl = "/api/songs/";
+const editSongUrl = "http://addis-song-backend.onrender.com/songs/";
 function* editSongs(action: any) {
   try {
     const song: { data: any } = yield call(() =>
