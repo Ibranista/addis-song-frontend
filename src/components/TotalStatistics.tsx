@@ -117,71 +117,81 @@ function TotalStatistics() {
   return (
     <div
       className="bg-gray-200
-    flex flex-col justify-center items-center
+    flex justify-center items-center flex-wrap gap-3
     "
     >
-      <h1
-        className="
+      <section className="total">
+        <h1
+          className="
       text-4xl
       mb-3
       "
-      >
-        Total Statistics
-      </h1>
-      <ul className="bg-white rounded-lg shadow-lg p-6 mx-auto divide-y divide-gray-300">
-        <li className="py-2">
-          <span className="font-bold text-gray-700">Number of All songs:</span>{" "}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {songs.length}
-          </button>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-gray-700">
-            Number of All Artists:
-          </span>{" "}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {artists.length}
-          </button>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-gray-700">Number of All Albums:</span>{" "}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {albums.length}
-          </button>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-gray-700">Number of All Genres:</span>{" "}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {genres.length}
-          </button>
-        </li>
-      </ul>
-
-      <h1
-        className="
-      text-4xl
-      mb-3
-      "
-      >
-        Specific Stats
-      </h1>
-      <section className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto divide-y divide-gray-300 mb-5">
-        <h1 className=" font-bold text-gray-700 mb-4">
-          Total number of songs in every genre
+        >
+          Total Statistics
         </h1>
-        {Object.keys(genreCount).map((genre) => {
-          return (
-            <div className="py-2">
-              <h2 className="font-bold text-gray-700">genre {genre}</h2>
-              <p className="text-gray-500">has {genreCount[genre]} songs</p>
-            </div>
-          );
-        })}
+        <ul className="bg-white rounded-lg shadow-lg p-6 mx-auto divide-y divide-gray-300">
+          <li className="py-2">
+            <span className="font-bold text-gray-700">
+              Number of All songs:
+            </span>{" "}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {songs.length}
+            </button>
+          </li>
+          <li className="py-2">
+            <span className="font-bold text-gray-700">
+              Number of All Artists:
+            </span>{" "}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {artists.length}
+            </button>
+          </li>
+          <li className="py-2">
+            <span className="font-bold text-gray-700">
+              Number of All Albums:
+            </span>{" "}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {albums.length}
+            </button>
+          </li>
+          <li className="py-2">
+            <span className="font-bold text-gray-700">
+              Number of All Genres:
+            </span>{" "}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {genres.length}
+            </button>
+          </li>
+        </ul>
       </section>
-
-      <section className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto divide-y divide-gray-300 mb-5">
-        <h1>Total of songs & albums each artist has</h1>
-        {artistNumbers}
+      <section className="specific">
+        <h1
+          className="
+      text-4xl
+      mb-3
+      "
+        >
+          Specific Stats
+        </h1>
+        <section className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto divide-y divide-gray-300 mb-5">
+          <h1 className=" font-bold text-gray-700 mb-4">
+            Total number of songs in every genre
+          </h1>
+          {Object.keys(genreCount).map((genre) => {
+            return (
+              <div className="py-2">
+                <h2 className="font-bold text-gray-700">genre {genre}</h2>
+                <p className="text-gray-500">has {genreCount[genre]} songs</p>
+              </div>
+            );
+          })}
+        </section>
+      </section>
+      <section className="total">
+        <section className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto divide-y divide-gray-300 mb-5">
+          <h1>Total of songs & albums each artist has</h1>
+          {artistNumbers}
+        </section>
       </section>
       <section
         className="
