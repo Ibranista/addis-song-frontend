@@ -78,7 +78,7 @@ function CollapsibleSidebar({ children }: { children: JSX.Element }): any {
         <SidebarToggle onClick={handleToggle}>
           {collapsed ? "☰" : "✖"}
         </SidebarToggle>
-        <Sidebar width={collapsed ? "64px" : "200px"} height="100vh" p={3}>
+        <Sidebar width={collapsed ? "64px" : "200px"} height="100%" p={3}>
           <SidebarItem mb={3}>
             <Link to="/">
               <SidebarLink color="#fff">Home</SidebarLink>
