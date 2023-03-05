@@ -64,7 +64,9 @@ const SongButton = styled.button`
   font-size: 16px;
 `;
 const SongList = () => {
+  //songs[]
   const songs = useSelector((state: any) => state.songs.songs);
+  // reducer songs(inside store)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -121,9 +123,9 @@ const SongList = () => {
       </select>
       <button
         onClick={() => setSortGenre(!sortGenre)}
-        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:text-black focus:border-x-slate-700 mb-3 hover:bg-blue-500 hover:text-white"
+        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:text-black focus:border-x-slate-700 mb-3 hover:bg-white"
       >
-        {sortGenre ? "Sort by Title" : "Sort by Genre"}
+        {sortGenre ? "Sort by Title" : "unsort"}
       </button>
       <ContainerWrapper className="flex-col md:flex-row pb-5 flex-wrap">
         {sortedSongs.map((song: any) => (
