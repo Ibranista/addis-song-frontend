@@ -108,7 +108,7 @@ const SongList = () => {
       <select
         value={selectedGenre}
         onChange={handleGenreChange}
-        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-x-slate-700 mb-3"
+        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-x-slate-700 mb-3 hover:cursor-pointer"
       >
         <option value="">All Genres</option>
         {genres.map(
