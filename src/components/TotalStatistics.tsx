@@ -31,13 +31,9 @@ function TotalStatistics() {
     }
   }
   let genreCount: any = {};
-  for (let i = 0; i < songs.length; i++) {
-    let genre = songs[i].genre.toLowerCase().trim();
-    if (genre in genreCount) {
-      genreCount[genre]++;
-    } else {
-      genreCount[genre] = 1;
-    }
+  for (let genre of songs) {
+    genre = genre.genre.toLowerCase().trim();
+    genre in genreCount ? genreCount[genre]++ : (genreCount[genre] = 1);
   }
   const countArtist: { [artist: string]: { songs: number; albums: string[] } } =
     {};
@@ -116,7 +112,7 @@ function TotalStatistics() {
       </div>
     );
   }
-const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
