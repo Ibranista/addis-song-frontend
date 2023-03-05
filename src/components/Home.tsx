@@ -1,5 +1,21 @@
 import SongList from "../styles/SongStyles";
+import { useEffect } from "react";
+import { auth } from "../auth/firebase";
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("/AccountCreation");
+      }
+    });
+
+    return unsubscribe;
+  }, [navigate]);
+
   return (
     <>
       <h1

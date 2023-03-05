@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSongsFetch } from "../features/songSlice";
+import { auth } from "../auth/firebase";
+import { useNavigate } from "react-router-dom";
 function TotalStatistics() {
   const songs = useSelector((state: any) => state.songs.songs);
   const dispatch = useDispatch();
@@ -114,6 +116,17 @@ function TotalStatistics() {
       </div>
     );
   }
+const navigate = useNavigate();
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("/AccountCreation");
+      }
+    });
+
+    return unsubscribe;
+  }, [navigate]);
+
   return (
     <div
       className="bg-gray-200

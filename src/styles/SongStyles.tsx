@@ -63,16 +63,15 @@ const SongGenre = styled.p`
 const SongButton = styled.button`
   font-size: 16px;
 `;
-
 const SongList = () => {
-  const songs = useSelector((state: any) => state.songs.songs);
+  const songs = useSelector((state) => state.songs.songs);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSongsFetch());
   }, [dispatch, songs]);
 
-  const removeSong = (id: string) => {
+  const removeSong = (id) => {
     dispatch(removeOneSong(id));
   };
 
@@ -80,95 +79,69 @@ const SongList = () => {
   const [editSongId, setEditSongId] = useState("");
   const [songData, setSongData] = useState("");
 
-  const handleEditClick = (id: string, data: any) => {
+  const handleEditClick = (id, data) => {
     setEditSongId(id);
     setShowEdit(true);
     setSongData(data);
   };
 
-  const [slectedGenre, setSlectedGenre] = useState("");
-  const genres: any = [...new Set(songs.map((song: any) => song.genre))];
-  const handleGenreChange = (e: any) => {
-    setSlectedGenre(e.target.value);
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [sortGenre, setSortGenre] = useState(false);
+  const genres = [...new Set(songs.map((song) => song.genre))];
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
   };
+
+  const sortedSongs = songs
+    .filter((song) => !selectedGenre || song.genre === selectedGenre)
+    .sort((a, b) => (sortGenre ? a.genre.localeCompare(b.genre) : 0));
 
   return (
     <>
-      <select
-        value={slectedGenre}
-        onChange={handleGenreChange}
-        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-x-slate-700 mb-3"
+      <select value={selectedGenre} onChange={handleGenreChange}
       >
         <option value="">All Genres</option>
-        {genres.map((genre: any) => (
+        {genres.map((genre) => (
           <option key={genre} value={genre}>
             {genre}
           </option>
         ))}
       </select>
-      <ContainerWrapper className="flex-col md:flex-row pb-5">
-        {songs
-          .filter((song: any) => !slectedGenre || song.genre === slectedGenre)
-          .map((song: any) => (
-            <Container
-              key={song._id}
-              className="flex flex-col mr-2 flex-wrap md:flex-row hover:bg-gray-300 hover:scale-105
-              transition duration-500 ease-in-out 
-               md:w-1/3 lg:w-1/4 xl:w-1/5
-              rounded-lg shadow-lg
-              hover:cursor-pointer
-              "
+      <button onClick={() => setSortGenre(!sortGenre)}>
+        {sortGenre ? "Sort by Title" : "Sort by Genre"}
+      </button>
+      <div>
+        {sortedSongs.map((song) => (
+          <div key={song._id}>
+            <h2>{song.title}</h2>
+            <h3>{song.artist}</h3>
+            <p>Album: {song.album}</p>
+            <p>Genre: {song.genre}</p>
+            <button onClick={() => removeSong(song._id)}>Delete</button>
+            <button
+              onClick={() =>
+                handleEditClick(song._id, {
+                  artist: song.artist,
+                  title: song.title,
+                  album: song.album,
+                  genre: song.genre,
+                })
+              }
             >
-              <ImageContainer>
-                <ArtistImage
-                  src={
-                    "https://c4.wallpaperflare.com/wallpaper/15/304/59/music-musical-notes-abstract-digital-art-wallpaper-preview.jpg"
-                  }
-                  alt={song.artist}
-                />
-              </ImageContainer>
-              <SongDetailsContainer className="border-2">
-                <SongTitle className="text-xl underline font-bold">
-                  {song.title}
-                </SongTitle>
-                <SongArtist>{song.artist}</SongArtist>
-                <SongAlbum>Album: {song.album}</SongAlbum>
-                <SongGenre>Genre: {song.genre}</SongGenre>
-                <SongButton
-                  onClick={() => removeSong(song._id)}
-                  className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded w-full mb-2"
-                >
-                  Delete
-                </SongButton>
-                <SongButton
-                  onClick={() =>
-                    handleEditClick(song._id, {
-                      artist: song.artist,
-                      title: song.title,
-                      album: song.album,
-                      genre: song.genre,
-                    })
-                  }
-                  className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full"
-                >
-                  Edit Me
-                </SongButton>
-              </SongDetailsContainer>
-            </Container>
-          ))}
+              Edit
+            </button>
+          </div>
+        ))}
         {showEdit && (
-          <EditSong
-            id={editSongId}
-            songsData={songData}
-            editStatus={setShowEdit}
-          />
+          <EditSong id={editSongId} songsData={songData} editStatus={setShowEdit} />
         )}
-      </ContainerWrapper>
+      </div>
     </>
   );
 };
 
 export default SongList;
+  
 
 type EditSongProps = {
   id: string;

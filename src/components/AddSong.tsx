@@ -1,9 +1,12 @@
 import { toast } from "react-hot-toast";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSong } from "../features/songSlice";
+import { auth } from "../auth/firebase";
+import { useNavigate } from "react-router-dom";
 
 function AddSong() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     title: "",
@@ -27,6 +30,18 @@ function AddSong() {
     dispatch(addSong(songData));
     toast.success("Song added successfully");
   };
+
+  const [user,setUser] = React.useState<any>(null);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      if(!user){
+        toast.error("Please login to add songs");
+        navigate("/AccountCreation")
+      }
+    });
+    return unsubscribe;
+  }, [user]);
   return (
     <>
       <main className="bg-slate-300">

@@ -12,41 +12,18 @@ import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-      <Router>
-        <Provider store={store}>
-          <NavBar />
-          <CollapsibleSidebar>
-            <Conditional>
-              <App />
-            </Conditional>
-          </CollapsibleSidebar>
-        </Provider>
-      </Router>
-      <Toaster />
+    <Router>
+      <Provider store={store}>
+        <NavBar />
+        <CollapsibleSidebar>
+            <App />
+        </CollapsibleSidebar>
+      </Provider>
+    </Router>
+    <Toaster />
   </React.StrictMode>
 );
 
 import { auth } from "./auth/firebase";
 
-interface ConditionalProps {
-  children: ReactNode;
-}
 
-function Conditional({ children }: ConditionalProps): JSX.Element | null {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsUserSignedIn(true);
-      if (!isUserSignedIn) {
-        navigate("/AccountCreation");
-        return null;
-      }
-    });
-
-    return unsubscribe;
-  }, [isUserSignedIn, navigate]);
-
-
-  return <>{children}</>;
-}

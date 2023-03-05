@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { css } from "@emotion/css";
 import { color } from "styled-system";
 import NavBox from "../styles/Box";
@@ -18,6 +18,14 @@ function NavBar() {
       toast.error(e.message);
     }
   }
+  const [user,setUser] = React.useState<any>(null);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return unsubscribe;
+  }, [navigate]);
   return (
     // <div>
     //   <section
@@ -42,7 +50,7 @@ function NavBar() {
         py-2
         px-4
         rounded-md
-        ">{auth.currentUser?'signOut':''}</button>
+        ">{user?'signOut':'sign up using below options'}</button>
       </NavBox>
     </>
   );
