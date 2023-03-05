@@ -125,7 +125,7 @@ const SongList = () => {
       >
         {sortGenre ? "Sort by Title" : "Sort by Genre"}
       </button>
-      <ContainerWrapper className="flex-col md:flex-row pb-5">
+      <ContainerWrapper className="flex-col md:flex-row pb-5 flex-wrap">
         {sortedSongs.map((song: any) => (
           <Container
             key={song._id}
@@ -133,7 +133,7 @@ const SongList = () => {
           transition duration-500 ease-in-out 
            md:w-1/3 lg:w-1/4 xl:w-1/5
           rounded-lg shadow-lg
-          hover:cursor-pointer
+          hover:cursor-pointer mb-5
           "
           >
             <ImageContainer>
