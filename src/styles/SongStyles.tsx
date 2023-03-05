@@ -119,65 +119,68 @@ const SongList = () => {
           )
         )}
       </select>
-      <button onClick={() => setSortGenre(!sortGenre)}>
+      <button
+        onClick={() => setSortGenre(!sortGenre)}
+        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:text-black focus:border-x-slate-700 mb-3 hover:bg-blue-500 hover:text-white"
+      >
         {sortGenre ? "Sort by Title" : "Sort by Genre"}
       </button>
       <ContainerWrapper className="flex-col md:flex-row pb-5">
-      {sortedSongs.map((song: any) => (
-        <Container
-          key={song._id}
-          className="flex flex-col mr-2 flex-wrap md:flex-row hover:bg-gray-300 hover:scale-105
+        {sortedSongs.map((song: any) => (
+          <Container
+            key={song._id}
+            className="flex flex-col mr-2 flex-wrap md:flex-row hover:bg-gray-300 hover:scale-105
           transition duration-500 ease-in-out 
            md:w-1/3 lg:w-1/4 xl:w-1/5
           rounded-lg shadow-lg
           hover:cursor-pointer
           "
-        >
-          <ImageContainer>
-            <ArtistImage
-              src={
-                "https://c4.wallpaperflare.com/wallpaper/15/304/59/music-musical-notes-abstract-digital-art-wallpaper-preview.jpg"
-              }
-              alt={song.artist}
-            />
-          </ImageContainer>
-          <SongDetailsContainer className="border-2">
-            <SongTitle className="text-xl underline font-bold">
-              {song.title}
-            </SongTitle>
-            <SongArtist>{song.artist}</SongArtist>
-            <SongAlbum>Album: {song.album}</SongAlbum>
-            <SongGenre>Genre: {song.genre}</SongGenre>
-            <SongButton
-              onClick={() => removeSong(song._id)}
-              className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded w-full mb-2"
-            >
-              Delete
-            </SongButton>
-            <SongButton
-              onClick={() =>
-                handleEditClick(song._id, {
-                  artist: song.artist,
-                  title: song.title,
-                  album: song.album,
-                  genre: song.genre,
-                })
-              }
-              className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full"
-            >
-              Edit Me
-            </SongButton>
-          </SongDetailsContainer>
-        </Container>
-      ))}
-      {showEdit && (
-        <EditSong
-          id={editSongId}
-          songsData={songData}
-          editStatus={setShowEdit}
-        />
-      )}
-    </ContainerWrapper>
+          >
+            <ImageContainer>
+              <ArtistImage
+                src={
+                  "https://c4.wallpaperflare.com/wallpaper/15/304/59/music-musical-notes-abstract-digital-art-wallpaper-preview.jpg"
+                }
+                alt={song.artist}
+              />
+            </ImageContainer>
+            <SongDetailsContainer className="border-2">
+              <SongTitle className="text-xl underline font-bold">
+                {song.title}
+              </SongTitle>
+              <SongArtist>{song.artist}</SongArtist>
+              <SongAlbum>Album: {song.album}</SongAlbum>
+              <SongGenre>Genre: {song.genre}</SongGenre>
+              <SongButton
+                onClick={() => removeSong(song._id)}
+                className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded w-full mb-2"
+              >
+                Delete
+              </SongButton>
+              <SongButton
+                onClick={() =>
+                  handleEditClick(song._id, {
+                    artist: song.artist,
+                    title: song.title,
+                    album: song.album,
+                    genre: song.genre,
+                  })
+                }
+                className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full"
+              >
+                Edit Me
+              </SongButton>
+            </SongDetailsContainer>
+          </Container>
+        ))}
+        {showEdit && (
+          <EditSong
+            id={editSongId}
+            songsData={songData}
+            editStatus={setShowEdit}
+          />
+        )}
+      </ContainerWrapper>
     </>
   );
 };
